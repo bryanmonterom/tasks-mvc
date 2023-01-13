@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\monterb2\\Desktop\\TasksMVC\\TasksMVC\\TasksMVC.csproj": {}
+    "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\TasksMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\monterb2\\Desktop\\TasksMVC\\TasksMVC\\TasksMVC.csproj": {
+    "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\TasksMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\monterb2\\Desktop\\TasksMVC\\TasksMVC\\TasksMVC.csproj",
+        "projectUniqueName": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\TasksMVC.csproj",
         "projectName": "TasksMVC",
-        "projectPath": "C:\\Users\\monterb2\\Desktop\\TasksMVC\\TasksMVC\\TasksMVC.csproj",
-        "packagesPath": "C:\\Users\\monterb2\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\monterb2\\Desktop\\TasksMVC\\TasksMVC\\obj\\",
+        "projectPath": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\TasksMVC.csproj",
+        "packagesPath": "C:\\Users\\miste\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\monterb2\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\miste\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
