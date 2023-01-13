@@ -238,3 +238,15 @@ C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\refint\Tasks
 C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\TasksMVC.pdb
 C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\TasksMVC.genruntimeconfig.cache
 C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\ref\TasksMVC.dll
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\bin\Debug\net7.0\es\TasksMVC.resources.dll
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.Controllers.HomeController.es.resources
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.csproj.GenerateResource.cache
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\es\TasksMVC.resources.dll
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.Views.Home.Index.es.resources
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\bin\Debug\net7.0\en\TasksMVC.resources.dll
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.Views.Home.Index.en.resources
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\en\TasksMVC.resources.dll
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.SharedResource.en.resources
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.SharedResource.es.resources
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.Views.Shared._TranslationJS.en.resources
+C:\Users\monterb2\Desktop\TasksMVC\TasksMVC\obj\Debug\net7.0\TasksMVC.Resources.Views.Shared._TranslationJS.es.resources

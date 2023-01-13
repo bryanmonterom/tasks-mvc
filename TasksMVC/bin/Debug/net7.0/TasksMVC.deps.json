@@ -15,6 +15,14 @@
         },
         "runtime": {
           "TasksMVC.dll": {}
+        },
+        "resources": {
+          "es/TasksMVC.resources.dll": {
+            "locale": "es"
+          },
+          "en/TasksMVC.resources.dll": {
+            "locale": "en"
+          }
         }
       },
       "Azure.Core/1.24.0": {

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace TasksMVC.Entities
@@ -14,6 +15,9 @@ namespace TasksMVC.Entities
         public DateTime CreatedDate { get; set;}
         public IEnumerable<SubTask> SubTasks { get; set; }
         public IEnumerable<AttachedFile> AttachedFiles { get; set; }
+
+        public string IdUser  { get; set; }
+        public IdentityUser User { get; set; }
 
     }
 }

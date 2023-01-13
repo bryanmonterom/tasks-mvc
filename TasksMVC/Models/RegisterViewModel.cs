@@ -4,10 +4,10 @@ namespace TasksMVC.Models
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "The field {0} is required")]
-        [EmailAddress(ErrorMessage = "The field must be a valid email address")]
+        [Required(ErrorMessage = "Error.Required")]
+        [EmailAddress(ErrorMessage = "Error.Email")]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Error.Required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
     }
