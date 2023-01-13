@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TasksMVC.Models;
+using TasksMVC.Services;
 
 namespace TasksMVC.Controllers
 {
@@ -13,18 +14,28 @@ namespace TasksMVC.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        public UsersController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        private readonly ApplicationDbContext dbContext;
+
+        public UsersController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ApplicationDbContext dbContext)
         {
             _signInManager = signInManager;
+            this.dbContext = dbContext;
             _userManager = userManager;
         }
 
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return View();  
+            return View();
         }
+        [Authorize(Roles=Constants.AdminRole)]
+        public async Task<IActionResult> Index(string message = null)
+        {
 
+            var users = await dbContext.Users.Select(a => new UserViewModel() { Email = a.Email }).ToListAsync();
+            var model = new UserListViewModel() { Message = message, UserList = users };
+            return View(model);
+        }
 
 
         [AllowAnonymous]
@@ -36,8 +47,8 @@ namespace TasksMVC.Controllers
                 return View(model);
             }
 
-            var user = new IdentityUser(){Email = model.Email, UserName = model.Email};
-            var response =await _userManager.CreateAsync(user, password:model.Password);
+            var user = new IdentityUser() { Email = model.Email, UserName = model.Email };
+            var response = await _userManager.CreateAsync(user, password: model.Password);
             if (response.Succeeded)
             {
 
@@ -49,7 +60,7 @@ namespace TasksMVC.Controllers
                 foreach (var item in response.Errors)
                 {
                     ModelState.AddModelError(String.Empty, item.Description);
-                }    
+                }
             }
             return View(model);
         }
@@ -64,7 +75,37 @@ namespace TasksMVC.Controllers
 
             return View();
         }
+        [Authorize(Roles = Constants.AdminRole)]
 
+        [HttpPost]
+        public async Task<IActionResult> MakeAdmin(string email) {
+            var user = await dbContext.Users.Where(a => a.Email == email).FirstOrDefaultAsync();
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            await _userManager.AddToRoleAsync(user, Constants.AdminRole);
+            return RedirectToAction("Index", routeValues: new { message = "Role succesfully assigned  to " + user.Email });
+
+        }
+        [HttpPost]
+        [Authorize(Roles = Constants.AdminRole)]
+
+        public async Task<IActionResult> RemoveAdmin(string email)
+        {
+            var user = await dbContext.Users.Where(a => a.Email == email).FirstOrDefaultAsync();
+
+            if (user is null)
+            {
+                return NotFound();
+            }
+
+            await _userManager.RemoveFromRoleAsync(user, Constants.AdminRole);
+            return RedirectToAction("Index", routeValues: new { message = "Role removed succesfully from " + user.Email });
+
+        }
 
         [AllowAnonymous]
         [HttpPost]
@@ -144,8 +185,8 @@ namespace TasksMVC.Controllers
                 });
             }
 
-            var user = new IdentityUser() { Email = email, UserName = email};
-            var resultsCreateUser =await  _userManager.CreateAsync(user);
+            var user = new IdentityUser() { Email = email, UserName = email };
+            var resultsCreateUser = await _userManager.CreateAsync(user);
             if (!resultsCreateUser.Succeeded)
             {
                 message = resultsCreateUser.Errors.First().Description;
