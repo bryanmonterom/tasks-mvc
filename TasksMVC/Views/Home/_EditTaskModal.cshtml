@@ -1,0 +1,35 @@
+﻿<div class="modal fade" id="modal-edit-task" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-edit-task-title" data-bind="text: title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="txtCreateTaskTitle" autocomplete="off"
+                                   placeholder="Title" data-bind="{value: title , event:{change: handleChangeEditTask} }" />
+                        <label for="txtCreateTaskTitle">Task title</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Description</label>
+                        <textarea class="form-control" rows="4"
+                                      data-bind="{value: description , event:{change: handleChangeEditTask}}">
+                    </textarea>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                        <button class="btn btn-secondary mb-2 w-100 text-start" data-bind="{click: tryToDeleteTask}">
+                        <i class="bg-info bi-x-lg"></i>
+                        Delete Task
+                    </button>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</div>

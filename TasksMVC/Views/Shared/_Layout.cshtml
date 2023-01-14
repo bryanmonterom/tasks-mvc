@@ -41,17 +41,20 @@
         </main>
     </div>
 
-<footer class="border-top footer text-muted">
-    <div class="container d-flex" style="justify-content: space-between">
-        <div>
-            &copy; 2023 - TasksMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="border-top footer text-muted">
+        <div class="container d-flex" style="justify-content: space-between">
+            <div>
+                &copy; 2023 - TasksMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+            <partial name="_ChangeLanguage" />
         </div>
-            <partial name="_ChangeLanguage"/>
-    </div>
-</footer>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
     <partial name="_TranslationJS" />
 
     @await RenderSectionAsync("Scripts", required: false)

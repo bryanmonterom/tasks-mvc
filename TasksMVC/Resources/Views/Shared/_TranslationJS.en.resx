@@ -120,4 +120,10 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>There was an error</value>
   </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>The requested resource was not found</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>An unexpected error has ocurred</value>
+  </data>
 </root>

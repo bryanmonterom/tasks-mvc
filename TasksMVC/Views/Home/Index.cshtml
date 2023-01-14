@@ -1,24 +1,88 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization;
-@inject IViewLocalizer Localizer;
-
+@inject IViewLocalizer localizer;
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Tasks";
 }
 
 <div class="text-center">
-    <h1 class="display-4">@Localizer["Welcome"]</h1>
-    <p>@Localizer["Learn-More"]</p>
-
+    <h1 class="display-4">@localizer["My Task's"]</h1>
+    <button type="button"
+            class="btn btn-primary mb-3"
+            onclick="addNewTask()">
+        @localizer["Add new task"]
+    </button>
 </div>
 
-<div>
-    <h3>@ViewBag.Greetings</h3>
+<div id="container-task-lists" class="text-center">
+    <div id="tasks-resortable" class="text-start" data-bind="foreach: tasks">
+        <div name="task" class="border mb-2 p-2" style="cursor: pointer" data-bind="click: handleTaskClick">
+            <div data-bind="text: title, hidden: isNew" class="fw-bold"></div>
+
+            <input type="text"
+                   name="task-title"
+                   autocomplete="off"
+                   data-bind="value: title, visible: isNew,
+                    attr: {'data-id':id},
+                    event:{focusout: handleFocustOutTaskTitle}" />
+        </div>
+    </div>
+
+    <div data-bind="visible: loading" class="spinner-border">
+        <span class="visually-hidden">Loading</span>
+    </div>
+
+    <div data-bind="visible: noTasks">
+        There are no tasks to show
+    </div>
 </div>
-
-<button onclick="showError()">
-    Mostrar
-</button>
-
+<partial name="_EditTaskModal" />
 @section Scripts{
-    <script src="~/js/utilities.js"></script>
+    <script src="~/js/tasks.js" asp-append-version="true"> </script>
+    <script src="~/js/utilities.js" asp-append-version="true"> </script>
+
+    <script>
+
+        const urlTasks = "/api/tasks"
+
+        const modalEditTask = document.getElementById("modal-edit-task");
+
+        const modalEditTaskBootstrap= new bootstrap.Modal(modalEditTask);
+
+        function tasksListViewModelfn() {
+            var self = this;
+            self.tasks = ko.observableArray([]);
+            self.loading = ko.observable(true);
+            self.noTasks = ko.pureComputed(function () {
+                if (self.loading()) {
+                    return false;
+                }
+                return self.tasks().length === 0
+            })
+        }
+        const tasksListViewModel = new tasksListViewModelfn()
+
+        function taskElementViewModel({ id, title }) {
+            var self = this
+            self.id = ko.observable(id);
+            self.title = ko.observable(title)
+            self.isNew = ko.pureComputed(function () {
+                return self.id() == 0
+            })
+
+        }
+
+
+        const taskEditViewModel = {
+        id:0,
+        title: ko.observable(''),
+        description: ko.observable('')
+        }
+
+        getTasks();
+
+        ko.applyBindings(tasksListViewModel, document.getElementById("container-task-lists"));
+        ko.applyBindings(taskEditViewModel, document.getElementById("modal-edit-task"));
+
+
+    </script>
 }

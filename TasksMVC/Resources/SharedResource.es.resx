@@ -126,7 +126,13 @@
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>El recurso solicitado no fue encontrado</value>
+  </data>
   <data name="Remerbeme" xml:space="preserve">
     <value>Recuerdame</value>
+  </data>
+  <data name="UnexpectedError" xml:space="preserve">
+    <value>Ha ocurrido un error inesperado</value>
   </data>
 </root>

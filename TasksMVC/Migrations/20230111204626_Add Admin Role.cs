@@ -10,7 +10,7 @@ namespace TasksMVC.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"IF NOT EXISTS(SELECT ID FROM ASPNETROLES WHERE ID = '150652d5-3b43-4d63-b648-31416307eaee')
+            migrationBuilder.Sql(@"IF NOT EXISTS(SELECT ID FROM ASPNETROLES WHERE NormalizedName = 'ADMINISTRATOR')
 	                                    BEGIN
 	                                    Insert AspNetRoles (Id, Name, NormalizedName) 
 	                                    VALUES('150652d5-3b43-4d63-b648-31416307eaee', 'Administrator','ADMINISTRATOR')
@@ -20,7 +20,7 @@ namespace TasksMVC.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"DELETE FROM ASPNETROLES WHERE ID = '150652d5-3b43-4d63-b648-31416307eaee'");
+            migrationBuilder.Sql(@"DELETE FROM ASPNETROLES WHERE NormalizedName = 'ADMINISTRATOR'");
         }
     }
 }

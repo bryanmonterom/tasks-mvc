@@ -31,15 +31,10 @@ namespace TasksMVC.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.Greetings = _localizer["Good Morning!"];
             return View();
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+    
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
