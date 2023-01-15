@@ -42,11 +42,10 @@ namespace TasksMVC.Controllers
 
             var idUser = usersService.GetUserId();
 
-            var task = await context.Tasks.FirstOrDefaultAsync(t => t.UserId == idUser && t.Id == id);
+            var task = await context.Tasks.Include(t=> t.SubTasks.OrderBy(a=> a.Position)).FirstOrDefaultAsync(t => t.UserId == idUser && t.Id == id);
 
             if (task is null)
             {
-
                 return NotFound();
             }
             return task;
@@ -155,6 +154,8 @@ namespace TasksMVC.Controllers
             return Ok();
 
         }
+
+
     }
 
 

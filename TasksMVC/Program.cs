@@ -21,6 +21,11 @@ builder.Services.AddControllersWithViews(options =>
     .AddDataAnnotationsLocalization(options =>
     {
         options.DataAnnotationLocalizerProvider = (_, factory) => factory.Create(typeof(SharedResource));
+    }).AddJsonOptions(options =>
+    {
+
+        options.JsonSerializerOptions.ReferenceHandler =
+        System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
 
@@ -55,7 +60,7 @@ var app = builder.Build();
 app.UseRequestLocalization(options =>
     {
         options.DefaultRequestCulture = new RequestCulture("es");
-        options.SupportedUICultures = Constants.CultureUISupported.Select(culture=> new CultureInfo(culture.Value)).ToList();
+        options.SupportedUICultures = Constants.CultureUISupported.Select(culture => new CultureInfo(culture.Value)).ToList();
     }
 );
 

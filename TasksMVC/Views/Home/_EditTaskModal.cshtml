@@ -20,10 +20,14 @@
                                       data-bind="{value: description , event:{change: handleChangeEditTask}}">
                     </textarea>
                     </div>
+
+                    <div class="mb-3 ">
+                        <partial name="_Steps"></partial>
+                    </div>
                 </div>
                 <div class="col-lg-3">
                         <button class="btn btn-secondary mb-2 w-100 text-start" data-bind="{click: tryToDeleteTask}">
-                        <i class="bg-info bi-x-lg"></i>
+                        <i class="bi bi-x-lg"></i>
                         Delete Task
                     </button>
                 </div>
@@ -33,3 +37,5 @@
         </div>
     </div>
 </div>
+
+                      

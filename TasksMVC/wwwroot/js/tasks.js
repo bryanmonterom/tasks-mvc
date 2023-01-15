@@ -50,6 +50,7 @@ async function getTasks() {
         tasksListViewModel.tasks.push(new taskElementViewModel(item));
     });
 
+
     tasksListViewModel.loading(false);
 }
 
@@ -106,6 +107,14 @@ async function handleTaskClick(task) {
     taskEditViewModel.id = json.id;
     taskEditViewModel.title(json.title);
     taskEditViewModel.description(json.description)
+    taskEditViewModel.steps([])
+
+
+
+
+    json.subTasks.forEach((step) => {
+        taskEditViewModel.steps.push(new stepViewModel({ ...step, editingMode: false }))
+    })
 
     modalEditTaskBootstrap.show();
 
@@ -144,7 +153,6 @@ async function handleChangeEditTask() {
 async function editTask(task) {
 
     const data = JSON.stringify(task);
-    console.log(data)
 
     const response = await fetch(`${urlTasks}/${task.id}`, {
         method: 'PUT',
@@ -191,4 +199,9 @@ async function deleteTask(task) {
 
 function getIndexTaskEditing() {
     return tasksListViewModel.tasks().findIndex(a => a.id() == taskEditViewModel.id);
+}
+
+function getTaskEditing() {
+    const index = getIndexTaskEditing();
+    return tasksListViewModel.tasks()[index];
 }

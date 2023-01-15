@@ -17,7 +17,10 @@
     <div id="tasks-resortable" class="text-start" data-bind="foreach: tasks">
         <div name="task" class="border mb-2 p-2" style="cursor: pointer" data-bind="click: handleTaskClick">
             <div data-bind="text: title, hidden: isNew" class="fw-bold"></div>
-
+            <div name="stepsSummary" data-bind="visible: stepsTotal() > 0">
+                <span data-bind="text: stepsCompleted"></span>/<span data-bind="text: stepsTotal"></span>
+                <span data-bind="text: percentageCompleted"></span>
+            </div>
             <input type="text"
                    name="task-title"
                    autocomplete="off"
@@ -38,15 +41,18 @@
 <partial name="_EditTaskModal" />
 @section Scripts{
     <script src="~/js/tasks.js" asp-append-version="true"> </script>
+    <script src="~/js/steps.js" asp-append-version="true"> </script>
     <script src="~/js/utilities.js" asp-append-version="true"> </script>
 
     <script>
 
         const urlTasks = "/api/tasks"
+        const urlSteps = "/api/steps"
+
 
         const modalEditTask = document.getElementById("modal-edit-task");
 
-        const modalEditTaskBootstrap= new bootstrap.Modal(modalEditTask);
+        const modalEditTaskBootstrap = new bootstrap.Modal(modalEditTask);
 
         function tasksListViewModelfn() {
             var self = this;
@@ -61,21 +67,43 @@
         }
         const tasksListViewModel = new tasksListViewModelfn()
 
-        function taskElementViewModel({ id, title }) {
+        function taskElementViewModel({ id, title, stepsTotal, stepsCompleted }) {
             var self = this
             self.id = ko.observable(id);
-            self.title = ko.observable(title)
+            self.title = ko.observable(title),
+            self.stepsTotal = ko.observable(stepsTotal)
+            self.stepsCompleted = ko.observable(stepsCompleted)
             self.isNew = ko.pureComputed(function () {
                 return self.id() == 0
+            })
+            self.percentageCompleted = ko.pureComputed(function () {
+                const calc = Math.round(self.stepsCompleted() * 1.0 / self.stepsTotal() * 100)
+                return `(${calc}%)`;
             })
 
         }
 
 
         const taskEditViewModel = {
-        id:0,
-        title: ko.observable(''),
-        description: ko.observable('')
+            id: 0,
+            title: ko.observable(''),
+            description: ko.observable(''),
+            steps: ko.observableArray([])
+        }
+
+        function stepViewModel({ id, description, isCompleted, editingMode }) {
+
+            var self = this;
+
+            self.id = ko.observable(id || 0);
+            self.description = ko.observable(description || '');
+            self.previousDescription = '';
+            self.isCompleted = ko.observable(isCompleted);
+            self.editingMode = ko.observable(editingMode);
+
+            self.isNew = ko.pureComputed(function () {
+                return self.id() == 0;
+            })
         }
 
         getTasks();

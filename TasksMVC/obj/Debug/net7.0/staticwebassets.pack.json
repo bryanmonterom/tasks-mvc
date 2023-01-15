@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\wwwroot\\js\\steps.js",
+      "PackagePath": "staticwebassets\\js\\steps.js"
+    },
+    {
       "Id": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\wwwroot\\js\\tasks.js",
       "PackagePath": "staticwebassets\\js\\tasks.js"
     },

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bh/WJwsbtudGcr7dEAd9e295kcesqWlYIc6rOEe3ge8=",
+  "Hash": "TFwtnl+IpkcqfFfRDky6ZRy3AWrX+tCL7LXDpzrrq+A=",
   "Source": "TasksMVC",
   "BasePath": "_content/TasksMVC",
   "Mode": "Default",
@@ -100,6 +100,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\wwwroot\\js\\steps.js",
+      "SourceId": "TasksMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\wwwroot\\",
+      "BasePath": "_content/TasksMVC",
+      "RelativePath": "js/steps.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\steps.js"
     },
     {
       "Identity": "C:\\Users\\miste\\Desktop\\projects\\tasks-mvc\\TasksMVC\\wwwroot\\js\\tasks.js",
