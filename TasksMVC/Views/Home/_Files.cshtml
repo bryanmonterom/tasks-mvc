@@ -1,0 +1,36 @@
+﻿<div class=" modal-sub-section">
+    <label>
+        <i class="bi bi-paperclip"></i>
+        Attached files
+    </label>
+    <button class="btn btn-secondary btn-sm m-1" onclick="handleClickAddFile()">
+        <i class="bi bi-paperclip"></i> Add new file
+    </button>
+</div>
+
+<input type="file" id="fileToTask" multiple style="display: none" onchange="handleSelectionTaskFile(event)" />
+
+<div id="resortable-files" data-bind="foreach: files" style="cursor:move">
+    <div class="p-2" style="cursor:move">
+        <div style="cursor: pointer" class="fw-bold" data-bind="text: title, hidden: editingMode, click: handleClickFileTitle">
+        </div>
+
+        <div data-bind="visible: editingMode , event:{focusout: handleFocusOutFileTitle}">
+            <input name="attachedFileTitle" type="text" class="form-control" data-bind="value: title, attr:{'data-id':id}" />
+        </div>
+
+        <div class="mt-2">
+            @*  Added on
+            <span data-bind="text: published"></span>-*@
+            <button class="btn btn-danger" data-bind="{click: handleClickDeleteFile}">
+                <i class="bi bi-trash"></i>  Delete
+            </button>
+            <button class="btn btn-success" data-bind="{click: handleClickDownloadFile}">
+                <i class="bi bi-arrow-down-circle"></i>  Download
+            </button>
+            @*<span style="font-weight:bold; cursor:pointer" data-bind="click: handleClickDeleteFile">Delete</span> -*@
+            @*<span style="font-weight:bold; cursor:pointer" data-bind="click: handleClickDownloadFile">Download</span>*@
+        </div>
+    </div>
+
+</div>

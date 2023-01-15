@@ -52,6 +52,7 @@ builder.Services.AddLocalization(options =>
 });
 
 builder.Services.AddTransient<IUsersService, UsersService>();
+builder.Services.AddTransient<IAttachedFiles, LocalFileSaver>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();

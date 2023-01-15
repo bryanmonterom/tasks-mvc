@@ -42,7 +42,10 @@ namespace TasksMVC.Controllers
 
             var idUser = usersService.GetUserId();
 
-            var task = await context.Tasks.Include(t=> t.SubTasks.OrderBy(a=> a.Position)).FirstOrDefaultAsync(t => t.UserId == idUser && t.Id == id);
+            var task = await context.Tasks
+                .Include(t=> t.SubTasks.OrderBy(a=> a.Position)).
+                Include(t=> t.AttachedFiles.OrderBy(a => a.Position))
+                .FirstOrDefaultAsync(t => t.UserId == idUser && t.Id == id);
 
             if (task is null)
             {
@@ -51,6 +54,21 @@ namespace TasksMVC.Controllers
             return task;
 
         }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+
+            var idUser = usersService.GetUserId();
+
+            var tasks = await context.Tasks          
+                .Where(t => t.UserId == idUser ).Select(a=> new {Start = a.CreatedDate, Title=a.Title }).ToListAsync();
+
+        
+            return Ok(tasks);
+
+        }
+
 
 
 
@@ -74,7 +92,8 @@ namespace TasksMVC.Controllers
                 Title = title,
                 UserId = idUser,
                 CreatedDate = DateTime.UtcNow,
-                Order = position + 1
+                Order = position + 1,
+                Priority = "Low"
             };
 
             context.Add(task);
@@ -129,6 +148,7 @@ namespace TasksMVC.Controllers
 
             task.Title = editTaskDTO.Title;
             task.Description = editTaskDTO.Description;
+            task.Priority = editTaskDTO.Priority;
 
             await context.SaveChangesAsync();
 

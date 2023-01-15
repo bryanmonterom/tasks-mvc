@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
 </head>
-<body style="margin:0">
+@*<body style="margin:0">
     <div style="display: flex; justify-content: center; align-items: center; height: 100vh" class="container">
         <div style="margin-right:5rem">
             <h1>Tasks</h1>
@@ -26,5 +26,29 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+</body>*@
+
+
+<body style="margin: 0;">
+    <div style="display: flex; flex-direction:column; center; align-items: center; height: 100vh;">
+        <div class="logo-container">
+            <img class="img-main" src="~/img/logo.png" />
+            <h1>Tasks</h1>
+            <h4>In this app you will be able to handle your tasks</h4>
+        </div>
+        <main role="main" class="pb-3" style="width:25rem; background-color:white">
+
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

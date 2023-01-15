@@ -232,6 +232,9 @@ namespace TasksMVC.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
+                    b.Property<string>("Published")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TaskId")
                         .HasColumnType("int");
 
@@ -290,6 +293,9 @@ namespace TasksMVC.Migrations
 
                     b.Property<int>("Order")
                         .HasColumnType("int");
+
+                    b.Property<string>("Priority")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()

@@ -92,3 +92,5 @@ C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\TasksMVC.gen
 C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\ref\TasksMVC.dll
 C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\es\TasksMVC.resources.cs
+C:\Users\miste\Desktop\projects\tasks-mvc\TasksMVC\obj\Debug\net7.0\en\TasksMVC.resources.cs

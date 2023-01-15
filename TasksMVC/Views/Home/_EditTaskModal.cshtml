@@ -6,36 +6,66 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-            <div class="row">
-                <div class="col-lg-9">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="txtCreateTaskTitle" autocomplete="off"
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="txtCreateTaskTitle" autocomplete="off"
                                    placeholder="Title" data-bind="{value: title , event:{change: handleChangeEditTask} }" />
-                        <label for="txtCreateTaskTitle">Task title</label>
-                    </div>
+                            <label for="txtCreateTaskTitle">Task title</label>
+                        </div>
 
-                    <div class="mb-3">
-                        <label>Description</label>
-                        <textarea class="form-control" rows="4"
+                        <div class="mb-3">
+                            <label>Description</label>
+                            <textarea class="form-control" rows="4"
                                       data-bind="{value: description , event:{change: handleChangeEditTask}}">
                     </textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-priority">
+                                <div class="form-priority-title">
+                                    <label class="form-field-title">Priority:</label>
+                                </div>
+                                <div >
+
+                                    <input type="radio" name="mpriority" data-bind="click:handlePriorityChange, checked: priority" value='Low'>
+
+                                    <label for="priority-low" class="priority low">Low</label>
+
+                                    <input type="radio" name="mpriority" value="Medium" data-bind="checked: priority ,click:handlePriorityChange ">
+
+                                    <label for="priority-Medium" class="priority medium">Medium</label>
+
+                                    <input type="radio" name="mpriority" value="High" data-bind="checked: priority,click:handlePriorityChange">
+
+                                    <label for="priority-High" class="priority high">High</label>
+
+                                </div>
+
+                            </div>
                     </div>
 
                     <div class="mb-3 ">
                         <partial name="_Steps"></partial>
                     </div>
-                </div>
+
+                    <div class="mb-3 ">
+                        <partial name="_Files"></partial>
+                    </div>
+                    </div>
+
                 <div class="col-lg-3">
-                        <button class="btn btn-secondary mb-2 w-100 text-start" data-bind="{click: tryToDeleteTask}">
-                        <i class="bi bi-x-lg"></i>
+                    <button class="btn btn-danger mb-2 w-100 text-start" data-bind="{click: tryToDeleteTask}">
+                        <i class="bi bi-trash"></i>
                         Delete Task
                     </button>
                 </div>
             </div>
-            </div>
+
 
         </div>
     </div>
+
+</div>
 </div>
 
-                      

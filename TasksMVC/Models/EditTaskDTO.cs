@@ -10,5 +10,7 @@ namespace TasksMVC.Models
         [StringLength(250)]
         public string Title { get; set; }
         public string Description { get; set; }
+        public string Priority { get; set; }
+
     }
 }

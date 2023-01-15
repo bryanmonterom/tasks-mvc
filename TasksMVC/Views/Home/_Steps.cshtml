@@ -1,19 +1,21 @@
-﻿<label>
-    <i class="bi-check-square bi"></i>
-    Steps
-</label>
-<button class="btn btn-secondary btn-sm" onclick="handleClickAddStep()">
-    <i class="bi bi-plus"></i>
-</button>
+﻿<div class=" modal-sub-section" >
+    <label>
+        <i class="bi-check-square bi"></i>
+        Steps
+    </label>
+    <button class="btn btn-secondary btn-sm m-1" onclick="handleClickAddStep()">
+        <i class="bi bi-plus"></i> Add new step
+    </button>
+</div>
 
-<div id="resortable-steps" data-bind="foreach: steps">
-    <div class="mt-2">
+
+<div id="resortable-steps" data-bind="foreach: steps" style="cursor:move">
+    <div class="mt-2" style="cursor:move">
         <div class="row">
             <div class="col-1">
                 <input type="checkbox" class="form-check-input" name="chxStep"
                        data-bind="click: handleCheckboxStep,
                                 checked: isCompleted,
-                                    clickBubble: false,
                                    attr:{'data-id': id}" />
             </div>
             <div class="col-11">
@@ -27,7 +29,7 @@
                     <button class="btn btn-success" data-bind="{click: handleSaveStep}">
                         Save
                     </button>
-                    <button class="btn btn-primary" data-bind="{click: handleCancelSaveStep}">
+                    <button class="btn btn-secondary" data-bind="{click: handleCancelSaveStep}">
                         Cancel
                     </button>
                     <button class="btn btn-danger " data-bind="{hidden: isNew, click: handleClickDeleteStep}">
