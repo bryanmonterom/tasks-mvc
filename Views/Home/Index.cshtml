@@ -1,0 +1,188 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer localizer;
+@{
+    ViewData["Title"] = "Tasks";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@localizer["My Task's"]</h1>
+    <button type="button"
+            class="btn btn-primary mb-3"
+            onclick="addNewTask()">
+        @localizer["Add new task"]
+    </button>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6" id="calendar" style="background-color:white; padding:1rem; border:1px solid lightgray; border-radius:5px">
+        </div>
+
+        <div id="container-task-lists" class="text-center col-sm-6" style="margin-top:2rem">
+            <div id="tasks-resortable" class="text-start" data-bind="foreach: tasks" style=" cursor:move">
+                <div name="task" class=" mb-2 p-2 task " style="cursor: move" data-bind="click: handleTaskClick, class:priority">
+                    <div data-bind="text: title, hidden: isNew" class="fw-bold"></div>
+                    <div name="stepsSummary" data-bind="visible: stepsTotal() > 0">
+                        <span data-bind="text: stepsCompleted"></span>/<span data-bind="text: stepsTotal"></span>
+                        <span data-bind="text: percentageCompleted"></span>
+                    </div>
+                    <input type="text"
+                           name="task-title"
+                           autocomplete="off"
+                           data-bind="value: title, visible: isNew,
+                    attr: {'data-id':id},
+                    event:{focusout: handleFocustOutTaskTitle}" />
+                </div>
+            </div>
+
+            <div data-bind="visible: loading" class="spinner-border">
+                <span class="visually-hidden">Loading</span>
+            </div>
+
+            <div data-bind="visible: noTasks">
+                There are no tasks to show
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<partial name="_EditTaskModal" />
+@section Scripts{
+    <script src="~/js/attachedFiles.js" asp-append-version="true"> </script>
+    <script src="~/js/utilities.js" asp-append-version="true"> </script>
+    <script src="~/js/tasks.js" asp-append-version="true"> </script>
+    <script src="~/js/steps.js" asp-append-version="true"> </script>
+    <script src="~/lib/fullcalendar/index.global.min.js"></script>
+
+
+
+    <script>
+        $(function(){
+  
+        })
+
+        window.onload = function () {
+    $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
+};
+
+// add the responsive classes when navigating with calendar buttons
+$(document).on('click', '.fc-button', function(e) {
+    $('.fc-toolbar.fc-header-toolbar').addClass('row col-lg-12');
+});
+
+        const urlTasks = "/api/tasks"
+        const urlSteps = "/api/steps"
+        const urlFiles = "/api/files"
+
+        const calendarElement = document.getElementById("calendar");
+
+        const calendar = new FullCalendar.Calendar(calendarElement, {
+            dayMaxEventRows: 3,
+            initialView: 'listWeek',
+            aspectRatio: 1.5,
+            events: `${urlTasks}/GetAll`,
+            dateClick: async function (info) {
+                //await FindTransactionsByDate(info.dateStr);
+            }
+        });
+
+        calendar.render();
+
+
+        function UpdateCalendar() {
+            var orgSource = calendar.getEventSources();
+            orgSource[0].remove();
+
+            // add new source
+            // new events will be immediately fetched from this source
+            // and placed on the calendar.
+            calendar.addEventSource(`${urlTasks}/GetAll`);
+        }
+
+
+
+
+        const modalEditTask = document.getElementById("modal-edit-task");
+
+        const modalEditTaskBootstrap = new bootstrap.Modal(modalEditTask);
+
+        function tasksListViewModelfn() {
+            var self = this;
+            self.tasks = ko.observableArray([]);
+            self.loading = ko.observable(true);
+            self.noTasks = ko.pureComputed(function () {
+                if (self.loading()) {
+                    return false;
+                }
+                return self.tasks().length === 0
+            })
+        }
+        const tasksListViewModel = new tasksListViewModelfn()
+
+        function taskElementViewModel({ id, title, stepsTotal, stepsCompleted, priority, targetDate }) {
+            var self = this
+            self.id = ko.observable(id);
+            self.title = ko.observable(title);
+                self.priority = ko.observable(priority || 'Low');
+            self.stepsTotal = ko.observable(stepsTotal);
+            self.stepsCompleted = ko.observable(stepsCompleted);
+            self.isNew = ko.pureComputed(function () {
+                return self.id() == 0
+            })
+            self.percentageCompleted = ko.pureComputed(function () {
+                const calc = Math.round(self.stepsCompleted() * 1.0 / self.stepsTotal() * 100)
+                return `(${calc}%)`;
+            })
+          
+
+        }
+
+
+        const taskEditViewModel = {
+            id: 0,
+            title: ko.observable(''),
+            description: ko.observable(''),
+            steps: ko.observableArray([]),
+            files: ko.observableArray([]),
+            priority: ko.observable(''),
+
+        }
+
+        function stepViewModel({ id, description, isCompleted, editingMode }) {
+
+            var self = this;
+
+            self.id = ko.observable(id || 0);
+            self.description = ko.observable(description || '');
+            self.previousDescription = '';
+            self.isCompleted = ko.observable(isCompleted);
+            self.editingMode = ko.observable(editingMode);
+
+            self.isNew = ko.pureComputed(function () {
+                return self.id() == 0;
+            })
+        }
+
+
+        function attachedFielViewModel({ id, title, createdDate, editingMode, position, url, published }) {
+
+            var self = this;
+            self.id = id;
+            self.title = ko.observable(title || "");
+            self.createdDate = createdDate;
+            self.editingMode = ko.observable(editingMode);
+            self.position = position;
+            self.url = url;
+            self.published = published;
+
+        }
+
+        getTasks();
+
+        ko.applyBindings(tasksListViewModel, document.getElementById("container-task-lists"));
+        ko.applyBindings(taskEditViewModel, document.getElementById("modal-edit-task"));
+
+
+    </script>
+}
