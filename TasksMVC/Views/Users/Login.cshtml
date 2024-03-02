@@ -1,6 +1,7 @@
 ﻿@model LoginViewModel
 @{
     ViewData["Title"] = "Log in";
+    var pass = "Aa123456@";
 }
 
 <div class="card">
@@ -22,7 +23,7 @@
 
             <div class="mb-3">
                 <label asp-for="Password" class="form-label"></label>
-                <input type="password" asp-for="Password" class="form-control" />
+                <input type="password" asp-for="Password" class="form-control" value="@pass"/>
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 

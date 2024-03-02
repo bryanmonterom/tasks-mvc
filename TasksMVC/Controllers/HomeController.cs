@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.Extensions.Localization;
 using TasksMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TasksMVC.Controllers
 {
@@ -34,7 +35,7 @@ namespace TasksMVC.Controllers
             return View();
         }
 
-    
+        [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

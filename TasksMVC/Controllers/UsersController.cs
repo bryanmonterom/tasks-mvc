@@ -73,7 +73,10 @@ namespace TasksMVC.Controllers
                 ViewBag.Message = message;
             }
 
-            return View();
+            var user = new LoginViewModel() { Email = "user1@email.com"};
+
+
+            return View(user);
         }
         [Authorize(Roles = Constants.AdminRole)]
 
@@ -116,18 +119,30 @@ namespace TasksMVC.Controllers
                 return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
-                lockoutOnFailure: false);
+            try
+            {
 
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "Home");
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                    lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "The User name or password provided is not valid");
+                }
+
             }
-            else
+            catch (Exception e)
             {
-                ModelState.AddModelError(string.Empty, "The User name or password provided is not valid");
+                Console.WriteLine(e);
+                throw;
             }
-            return View();
+
+          
+            return View("Login");
         }
 
         [HttpPost]
