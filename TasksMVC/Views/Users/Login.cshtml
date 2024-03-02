@@ -7,6 +7,7 @@
 <div class="card">
     <div class="card-body">
         <h1>Login</h1>
+        <h6 style="color: darkgray">You can use the prefilled ones to test the app, just hit log in!</h6>
         @if (ViewData.Keys.Contains("Message"))
         {
             <p class="text-danger">@ViewData["Message"]</p>
@@ -17,7 +18,7 @@
 
             <div class="mb-3">
                 <label asp-for="Email" class="form-label"></label>
-                <input type="email" asp-for="Email" class="form-control" />
+                <input type="email" asp-for="Email" class="form-control" value="user1@email.com"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 

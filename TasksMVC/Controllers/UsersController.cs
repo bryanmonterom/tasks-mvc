@@ -73,7 +73,7 @@ namespace TasksMVC.Controllers
                 ViewBag.Message = message;
             }
 
-            var user = new LoginViewModel() { Email = "user1@email.com"};
+            var user = new LoginViewModel() { Email = "user1@email.com", Password = "Aa123456@"};
 
 
             return View(user);
