@@ -11,7 +11,6 @@ App built with .NET Core 7 for the backend and HTML, Bootstrap and KnockoutJS fo
 * Assign priorities to a task.
 
 
-Live Demo: https://bryanmonterom3.bsite.net/
 ## Screenshots
 
 ![Add](https://i.imgur.com/pLBN4I2.png)
